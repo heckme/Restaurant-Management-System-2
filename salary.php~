@@ -1,0 +1,59 @@
+<?php 
+error_reporting(0);
+$Salft=$_POST['sal_perhour_ft'];
+$salt = 'something random';
+$hash = md5($Salft);
+$Salpt=$_POST['sal_perhour_pt'];
+$Saltax=$_POST['sal_tax']; 
+$connection = mysql_connect("localhost", "root", ""); 
+if(!$connection) 
+{
+die("Connection failed " . mysql_error());
+}
+$db_conn = mysql_select_db("hms", $connection);
+if(!$db_conn)
+{
+die("Connection failed " . mysql_error());
+}
+
+
+//mysql_query("INSERT INTO salary_generaldetails(salary_perhour_ft) VALUES ('$hash')");	
+$sqlft = mysql_query("SELECT salary_perhour_ft FROM salary_generaldetails");
+$sqlpt = mysql_query("SELECT salary_perhour_pt FROM salary_generaldetails");
+//$result = $connection->query($sql);
+//$result = mysql_fetch_row($sql);
+
+
+if ( mysql_num_rows($sqlft) <= 0) 
+{ 
+
+	mysql_query("INSERT INTO salary_generaldetails(salary_perhour_ft) VALUES ('$hash')");	
+
+}
+else
+{
+	mysql_query("UPDATE salary_generaldetails SET salary_perhour_ft = '$hash'");
+}
+
+
+if ( mysql_num_rows($sqlpt) <= 0) 
+{ 
+
+	mysql_query("INSERT INTO salary_generaldetails(salary_perhour_pt) VALUES ('$Salpt')");	
+
+}
+else
+{
+	mysql_query("UPDATE salary_generaldetails SET salary_perhour_pt = '$Salpt'");
+}
+
+
+//$query = mysql_query("UPDATE salary_generaldetails SET salary_perhour_ft = ".$Salft);
+//$query = mysql_query("INSERT INTO salary_generaldetails VALUES ('$Salft','$Salpt','$Saltax')");
+
+//$query1 = mysql_query("UPDATE salary_generaldetails SET salary_perhour_pt = ".$Salpt);
+ 
+
+mysql_close($connection);
+
+?>   

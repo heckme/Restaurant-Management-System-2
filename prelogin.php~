@@ -1,0 +1,64 @@
+<?php
+
+error_reporting(0);
+
+session_start();
+if (isset($_SESSION[$username]))
+{
+  unset($_SESSION[$username]);
+  header('location:index.php');
+}
+session_destroy();
+
+ 
+error_reporting(E_WARNING);
+?>
+<!doctype html>
+<html>
+<head>
+<title>Pre login page</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+
+</head>
+
+<body>
+<div class="header">
+<h1>Welcome Admin</h1>
+ <?php echo date(" j/m/y h:iA "); 
+  ?>  
+
+</div>
+
+<center>
+<div id="main">
+<h1>Kindly re-enter details to access login details</h1>
+<div id="login">
+<form action="prelogin1.php" method="post">
+<table>
+<tr>
+<td><label>Username :</label></td>
+<td><input id="name" name="username" placeholder="username" type="text"></td>
+
+</tr>
+<tr>
+<td><label>Password :</label></td>
+<td><input id="password" name="password" placeholder="**********" type="password"></td>
+
+</tr>
+
+
+</table>
+<input name="submit" type="submit" value=" Enter ">
+<input name="reset" type="reset" value=" Reset ">
+<br>
+<span><?php echo $error; ?></span>
+</form>
+</div>
+</div>
+ </center>
+ 
+      
+
+
+</body>
+</html>

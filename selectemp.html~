@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+<title> SELECT EMPLOYEES</title>
+<link rel="stylesheet" type="text/css" href="style1.css">
+
+</head>
+
+<body>
+<div class="header">
+<h1>Welcome Admin</h1>
+</div>
+<input type="button" style="float:right" value="LOG OUT">
+<div class="nav">
+<center><h1>
+  <a href="insertemp.html">Insert employee</a><br><br>
+  <a href="deleteemp1.php">Delete employee</a><br><br>
+  <a href="selectemp.html">Select employee</a><br><br>
+  <a href="updateemp.php">Update employee</a><br><br>
+  <a href="insertsalary.php">Salary</a><br><br>
+  <a href="updatesalary.php">Update Salary</a><br><br>
+  
+
+</h1>
+ </center>
+</div>
+
+<div class="section">
+
+
+
+<center>
+<h1>SEARCH EMPLOYEES</h1>
+<U>PLEASE INSERT ONLY ONE VALUE</U><BR>
+ <form action="selectemp.php" method="post">
+<table>
+<tr>
+<td>By First name </td>
+<td><input type="text" name="Firstname"></td>
+</tr>
+<tr>
+<td>By Last name </td>
+<td><input type="text" name="Lastname"></td>
+</tr>
+<tr>
+<td>Availaible week days </td>
+<td><select name="AvailaibleWeek">
+					 					 <option value=""></option>
+                                         
+                                         <option value="Monday-Wednesday">Monday-Wednesday</option>
+                                         <option value="Wednesday-Sunday">Wednesday-Sunday</option>
+                                         <option value="Anyday">Anyday</option>
+                                         </select>
+                                         </td>
+</tr>
+<tr>
+<td>Jobtype </td>
+<td><select name="Jobtype">
+					 	<option value=""></option>
+                        <option value="ft">Full time</option>
+						<option value="pt">Part time</option>
+ 						</select></td>
+</tr>
+
+
+</table>
+
+ <input type="submit">
+ </form>
+  <form action="selectempall.php" method="post">
+ <input type="submit" VALUE="SHOW ALL">
+ 
+  </form>
+ 
+      </center>
+
+
+
+
+</div>
+
+</body>
+</html>
