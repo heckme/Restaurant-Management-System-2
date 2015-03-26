@@ -1,46 +1,7 @@
 <?php
 include 'session_files.php';
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-
-$query = "SELECT * FROM employee_salary order by emp_id";
-
-$db_result = mysql_query($query,$connection);
-
-
+require('db_connect.php');
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!doctype html>
 <html>
 <head>
@@ -93,16 +54,7 @@ $db_result = mysql_query($query,$connection);
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-              <td>{$row['emp_id']}</td> 
-              <td>{$row['month']}</td>
-			  <td>{$row['year']}</td>
-              <td>{$row['salary']}</td>
-               
-            </tr>\n";
-          }
+       include 'inc_updatesalary.php';
         ?>
       </tbody>
 
@@ -111,27 +63,11 @@ $db_result = mysql_query($query,$connection);
 
 <BR>
 
-
-
-     
-
-		
-
-
-
-
-
 <?php
-
 a:
-
 mysql_close($connection);
-
 ?>   
-
- 
       
 </div>
- 
 </body>
 </html>

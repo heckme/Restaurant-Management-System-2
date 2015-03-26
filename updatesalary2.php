@@ -1,52 +1,9 @@
 <?php
 include 'session_files.php';
-$EmpId = $_POST['EmpId'];
+require('db_connect.php');
 
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-
-$query = "SELECT * FROM employee_salary WHERE emp_id = ".$EmpId;
-
-$db_result = mysql_query($query,$connection);
-
-
-
-$querymonth = mysql_query("SELECT month FROM  employee_salary WHERE emp_id=".$EmpId);
-$resultmonth = mysql_fetch_array($querymonth);
-$salmonth = $resultmonth['month'];
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!doctype html>
 <html>
@@ -84,20 +41,7 @@ $salmonth = $resultmonth['month'];
 
 <div class="section">
  <center>
-
-<?php
-if (mysql_num_rows($db_result) > 0) {
-   
-} else {
-	echo "<h1>";
-	echo "Salary of ID specified does not exist. Try again.<br>";
-	echo "<a href='updatesalary.php'>Go back</a><br>";
-	echo "<a href='insertsalary.php'>Or Add new Salary</a><br>";
- 	echo "</h1>";
-	goto a;
-}
-
-?>
+ 
 <center><h1>OLD SALARY DETAILS OF EMPLOYEE</h1><br><br><br>
  </center>
  <table border="1" class="table1">
@@ -111,16 +55,7 @@ if (mysql_num_rows($db_result) > 0) {
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-              <td>{$row['emp_id']}</td> 
-              <td>{$row['month']}</td>
-			  <td>{$row['year']}</td>
-              <td>{$row['salary']}</td>
-               
-            </tr>\n";
-          }
+       	include 'inc_updatesalary2.php';
         ?>
       </tbody>
 
@@ -183,21 +118,11 @@ if (mysql_num_rows($db_result) > 0) {
  </form>
 </center>
  
-
-
-     
-
-		
-
-
-
  </center>
 
 
 <?php
-
 a:
-
 mysql_close($connection);
 
 ?>   
