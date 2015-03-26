@@ -1,45 +1,8 @@
 <?php
 include 'session_files.php';
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-
-$query = "SELECT * FROM salary_generaldetails";
-
-$db_result = mysql_query($query,$connection);
-
+require('db_connect.php');
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!doctype html>
 <html>
@@ -94,16 +57,7 @@ $db_result = mysql_query($query,$connection);
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-			 <td>{$row['salary_perhour_ft']}</td>
-             <td>{$row['salary_perhour_pt']}</td>
-             <td>{$row['tax']}</td>
-             <td>{$row['bonus']}</td>
-               
-            </tr>\n";
-          }
+		include 'inc_generalsalary.php';
         ?>
       </tbody>
 

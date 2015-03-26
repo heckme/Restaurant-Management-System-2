@@ -1,45 +1,7 @@
 <?php
 include 'session_files.php';
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-
-$query = "SELECT * FROM logindetails";
-
-$db_result = mysql_query($query,$connection);
-
-
+require('db_connect.php');
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!doctype html>
 <html>
@@ -68,7 +30,7 @@ $db_result = mysql_query($query,$connection);
   <a href="updateemp.php" class="a1">Update employee details</a><br>
   <a href="insertsalary.php" class="a1">Insert Employee Salary</a><br>
   <a href="updatesalary.php"  class="a1">Update Employee Salary</a><br>
-     <a href="selectsalary.php"  class="a1">Search Employee Salary</a><br>
+  <a href="selectsalary.php"  class="a1">Search Employee Salary</a><br>
   <a href="updategeneralsalary.php" class="a1">Update General Salary Details</a><br>
   <a href="logindetails.php" class="a1active">Login Details</a><br>
 
@@ -90,14 +52,7 @@ $db_result = mysql_query($query,$connection);
 
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-			 <td>{$row['username']}</td>
-             
-               
-            </tr>\n";
-          }
+      include 'inc_logindetailsgeneral.php';
         ?>
       </tbody>
 
@@ -149,16 +104,10 @@ $db_result = mysql_query($query,$connection);
 
 
 <?php
-
 a:
-
 mysql_close($connection);
-
 ?>   
-
- 
-      
-</div>
- 
+    
+</div> 
 </body>
 </html>

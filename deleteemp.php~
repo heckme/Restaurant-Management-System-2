@@ -42,7 +42,7 @@ include 'db_connect.php';
 <center>
 
 <?php
-include 'delete_emp.php';
+include 'inc_delete_emp.php';
   
 ?>
 </center>

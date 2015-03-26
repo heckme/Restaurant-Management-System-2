@@ -1,63 +1,6 @@
 <?php 
 include 'session_files.php';
- 
-$Fname=$_POST['Firstname'];
-$Lname = $_POST['Lastname'];
-$AvailDays=$_POST['AvailaibleWeek']; 		
-$Jobtype=$_POST['Jobtype']; 
-
-
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-if(!empty($Fname))
-{
-	
-$query = "SELECT * FROM employee_details WHERE emp_fname = '".$Fname."' ORDER BY emp_fname";
-	
-}
-
-else if(!empty($AvailDays))
-{
-	
-$query = "SELECT * FROM employee_details WHERE emp_availaibleweekday = '".$AvailDays."' ORDER BY emp_fname";
-	
-}
-
-else if(!empty($Jobtype))
-{
-	
-$query = "SELECT * FROM employee_details WHERE emp_jobtype = '".$Jobtype."' ORDER BY emp_fname";
-	
-}
-
-else if(!empty($Lname ))
-{
-	
-$query = "SELECT * FROM employee_details WHERE emp_lname = '".$Lname ."' ORDER BY emp_lname";
-	
-}
-
-else {
-goto x;
- 
-}
-
-
-
-
-
-$db_result = mysql_query($query,$connection);
-
-x:
+require('db_connect.php'); 
 ?>
 
 <!doctype html>
@@ -101,18 +44,7 @@ x:
 
 
 <?php
-
-if (mysql_num_rows($db_result) > 0) {
-   
-} else {
-	echo "<h1>";
-	echo "Nothing is selected OR Value does not exist. <br>Try again.<br>";
-	 
-    	echo "</h1>";
-	goto a;
-}
-
-
+	include 'inc_selectemp.php';
 ?>
 
 
@@ -145,53 +77,16 @@ if (mysql_num_rows($db_result) > 0) {
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-              <td>{$row['emp_id']}</td> 
-              <td>{$row['emp_fname']}</td>
-			  <td>{$row['emp_lname']}</td>
-              <td>{$row['emp_address']}</td>
-              <td>{$row['emp_city']}</td>
-    
-	          <td>{$row['emp_pincode']}</td>
-              <td>{$row['emp_gender']}</td>
-              <td>{$row['emp_contactno']}</td> 
-			  <td>{$row['emp_jobtype']}</td> 
-			  <td>{$row['emp_joinday']}</td>
-			  <td>{$row['emp_joinmonth']}</td>
-			  <td>{$row['emp_joinyear']}</td>
-		
-			  <td>{$row['emp_availaibleweekday']}</td> 
-			  <td>{$row['emp_docs']}</td> 
-			  <td>{$row['emp_emailid']}</td> 
-			   
-            </tr>\n";
-          }
+       include 'inc_displayempdetails.php';
         ?>
       </tbody>
 
     </table>
 <br>
-
-
-
-
-		
-
-
-
-
-
-<?php
-
-a:
-
-mysql_close($connection);
-echo "<a href='selectempmain.php'>Back to select employee page</a>";
- echo "<br><br>";
- echo "<a href='homepage.php'>Back to home page</a>";
-?>   
+  
+<a href='selectempmain.php'>Back to select employee page</a> 
+<br><br>
+<a href='homepage.php'>Back to home page</a>
 </center>
      
 </div>

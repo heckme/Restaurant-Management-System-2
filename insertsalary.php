@@ -1,47 +1,7 @@
 <?php
 include 'session_files.php';
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-
-$query = "SELECT e.emp_id, e.emp_fname, e.emp_lname,  s.month, s.year, s.salary FROM employee_details as e LEFT  JOIN 
-employee_salary as s on s.emp_id=e.emp_id ORDER BY e.emp_id";
-
-$db_result = mysql_query($query,$connection);
-
-
+require('db_connect.php');
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!doctype html>
 <html>
 <head>
@@ -68,7 +28,7 @@ $db_result = mysql_query($query,$connection);
   <a href="updateemp.php" class="a1">Update employee details</a><br>
   <a href="insertsalary.php" class="a1active">Insert Employee Salary</a><br>
   <a href="updatesalary.php" class="a1">Update Employee Salary</a><br>
-     <a href="selectsalary.php"  class="a1">Search Employee Salary</a><br>
+  <a href="selectsalary.php"  class="a1">Search Employee Salary</a><br>
   <a href="updategeneralsalary.php" class="a1">Update General Salary Details</a><br>
   <a href="logindetails.php" class="a1">Login Details</a><br>
   
@@ -86,39 +46,19 @@ $db_result = mysql_query($query,$connection);
           <th>Id</th><br />
           <th>Employee First Name</th><br />
           <th>Employee Last Name</th><br />
-           
           <th>Salary for month</th><br />
           <th>Salary for year</th><br />
           <th>Salary</th><br />
-
-        </tr>
+       </tr>
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-             <td>{$row['emp_id']}</td> 
-              <td>{$row['emp_fname']}</td>
-			  <td>{$row['emp_lname']}</td>
-       	      
-     <td>{$row['month']}</td>
-               <td>{$row['year']}</td>
-               <td>{$row['salary']}</td>
-                    
-            </tr>\n";
-          }
+        include 'inc_insertsalary.php';
         ?>
       </tbody>
-
-    </table>
-
-
+ </table>
 <BR>
-
-
 <center>
-
 <table>
 <tr>
 <td>
@@ -208,33 +148,18 @@ $db_result = mysql_query($query,$connection);
 &emsp;&emsp;&emsp;&emsp;
 </td>
 
-
-
 </tr>
 
 </table>
-
-
- 
-
 		
 </center>
 
-
-
-
 <?php
-
 a:
-
 mysql_close($connection);
-
 ?>   
-
- 
-      
+    
 </div>
 
- 
 </body>
 </html>

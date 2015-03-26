@@ -1,72 +1,9 @@
 <?php
 include 'session_files.php';
-$pt = $_POST["pt"];
-$ft = $_POST["ft"];
-$tax = $_POST["tax"];
-$bonus = $_POST["bonus"];
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
- 
-
-if(!empty($ft))
-{
- mysql_query("UPDATE salary_generaldetails SET salary_perhour_ft=".$ft);
-}
-
-
-if(!empty($pt))
-{
- mysql_query("UPDATE salary_generaldetails SET salary_perhour_pt =".$pt);
-}
-
-
-
-if(!empty($tax))
-{
- mysql_query("UPDATE salary_generaldetails SET tax =".$tax);
-}
-
-
-
-if(!empty($bonus))
-{
- mysql_query("UPDATE salary_generaldetails SET  bonus =".$bonus);
-}
-
-
+require('db_connect.php');
+include 'inc_generalsalary2.php';
  
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!doctype html>
 <html>
@@ -111,26 +48,11 @@ if(!empty($bonus))
 
 <a href="updategeneralsalary.php">Go back to view data</a><br>
 <br><a href="Homepage.php">Back to Homepage</a>
-
-
-     
-
-		
-
-
-
-
-
-<?php
-
-a:
- 
+<?php 
 mysql_close($connection);
 
 ?>   
-
- 
-      
+    
 </div>
   </center>
 </body>

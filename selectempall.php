@@ -1,24 +1,6 @@
 <?php 
 include 'session_files.php';
-
-
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
-
-	
-$query = "SELECT * FROM employee_details ORDER BY emp_fname";
-
-
-
-$db_result = mysql_query($query,$connection);
+require('db_connect.php');
 
 
 ?>
@@ -93,44 +75,13 @@ $db_result = mysql_query($query,$connection);
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-              <td>{$row['emp_id']}</td> 
-              <td>{$row['emp_fname']}</td>
-			  <td>{$row['emp_lname']}</td>
-              <td>{$row['emp_address']}</td>
-              <td>{$row['emp_city']}</td>
-    
-	          <td>{$row['emp_pincode']}</td>
-              <td>{$row['emp_gender']}</td>
-              <td>{$row['emp_contactno']}</td> 
-			  <td>{$row['emp_jobtype']}</td> 
-			  <td>{$row['emp_joinday']}</td>
-			  <td>{$row['emp_joinmonth']}</td>
-			  <td>{$row['emp_joinyear']}</td>
-		
-			  <td>{$row['emp_availaibleweekday']}</td> 
-			  <td>{$row['emp_docs']}</td> 
-			  <td>{$row['emp_emailid']}</td> 
-			   
-            </tr>\n";
-          }
+        include 'inc_selectempall.php';
         ?>
       </tbody>
 
     </table>
-
-
-
-
-
- <br>
+<br>
 <a href="Homepage.php">Back to homepage</a>
-
-
-
-
 
 <?php
 

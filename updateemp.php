@@ -1,15 +1,6 @@
 <?php
 include 'session_files.php';
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
+require('db_connect.php');
 
 
 $query = "SELECT * FROM employee_details order by emp_fname";
@@ -18,28 +9,6 @@ $db_result = mysql_query($query,$connection);
 
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!doctype html>
 <html>
@@ -84,15 +53,18 @@ $db_result = mysql_query($query,$connection);
  <table border="1" class="table1" >
       <thead>
         <tr>
-          <th>Id</th><br />
+           <th>Id</th><br />
           <th>Employee First_Name</th><br />
           <th>Employee Last_Name</th><br />
           <th>Employee Address</th><br />
+          <th>Employee City</th><br />
           <th>Pincode</th><br />
           <th>Gender</th><br />
           <th>Employee Contact Number</th><br />
           <th>Employee Job type</th><br />
           <th>Join date</td><br />
+          <th>Join month</td><br />
+          <th>Join year</td><br />
           <th>Weeks availaible</td><br />
           <th>Documents for Proof </td><br />
           <th>Email id</td><br />
@@ -100,51 +72,14 @@ $db_result = mysql_query($query,$connection);
       </thead>
       <tbody>
         <?php
-          while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-              <td>{$row['emp_id']}</td> 
-              <td>{$row['emp_fname']}</td>
-			  <td>{$row['emp_lname']}</td>
-              <td>{$row['emp_address']}</td>
-              <td>{$row['emp_pincode']}</td>
-              <td>{$row['emp_gender']}</td>
-              <td>{$row['emp_contactno']}</td> 
-			  <td>{$row['emp_jobtype']}</td> 
-			  <td>{$row['emp_joindate']}</td>
-			  <td>{$row['emp_availaibleweekday']}</td> 
-			  <td>{$row['emp_docs']}</td> 
-			  <td>{$row['emp_emailid']}</td> 
-			   
-            </tr>\n";
-          }
+         include 'inc_displayempdetails.php';
+         mysql_close($connection);
         ?>
       </tbody>
 
     </table>
 
-
 <BR>
-
-
-
-     
-
-		
-
-
-
-
-
-<?php
-
-a:
-
-mysql_close($connection);
-
-?>   
-
- 
       
 </div>
  

@@ -16,7 +16,7 @@
 		 $AvailDays=$_POST['AvailaibleWeek']; 
 		 $Docs=$_POST['Docs']; 
 		 $valid = true;
-       require('db_connect.php'); 
+       require('db_connect.php') ; 
   
 if(empty($_POST['Firstname']))
 {
