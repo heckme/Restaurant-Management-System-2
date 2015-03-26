@@ -1,46 +1,6 @@
 <?php 
 include 'session_files.php';
- 
-$EmpId=$_POST['EmpId'];
-  
-
-
-$connection = mysql_connect("localhost", "root", ""); 
-if(!$connection) 
-{
-die("Connection failed " . mysql_error());
-}
-$db_conn = mysql_select_db("hms", $connection);
-if(!$db_conn)
-{
-die("Connection failed " . mysql_error());
-}
- $valid = true;
-if(empty($_POST['EmpId'])){
-        $valid=false;
-         
-        goto a;
-    }
-
-if(!empty($EmpId))
-{
-	
-$query = "SELECT * FROM employee_salary WHERE emp_id = '".$EmpId."'";
-	
-$db_result = mysql_query($query,$connection);
-
-$querysal = mysql_query("SELECT sum(SALARY) AS sumsal FROM employee_salary WHERE emp_id = '".$EmpId."'");
-$rowsal = mysql_fetch_array($querysal);
-
-
- 
-}
-
- 
-
-
-
-a:
+require('db_connect.php'); 
 
 ?>
 
@@ -81,36 +41,13 @@ a:
 
 <div class="section">
 <center>
-
-
-
-<?php
- 
-if(empty($_POST['EmpId'])){
-        $valid=false;
-         
-        goto b;
-    }
-if (mysql_num_rows($db_result) > 0) {
-   
-} else {
-	echo "<h1>";
-	echo "Nothing is selected OR Value does not exist. <br>Try again.<br>";
-	 
-    	echo "</h1>";
-	goto b;
-}
  
 
- 
-
-?>
 
 
 
 
-
-<h1>Employee Data with Id <?php echo $EmpId?></h1>
+<h1>Employee Data</h1>
  
 <table class="table1" border="1">
       <thead>
@@ -124,16 +61,7 @@ if (mysql_num_rows($db_result) > 0) {
       </thead>
       <tbody>
         <?php
-         while( $row = mysql_fetch_array($db_result)){
-            echo
-            "<tr>
-             <td>{$row['emp_id']}</td> 
-             <td>{$row['month']}</td>
-				 <td>{$row['year']}</td>
- 				 <td> {$row['salary']} </td>
-           
-			   </tr>\n";
-          } 
+        include 'inc_selectsalary2.php';
         ?>
       </tbody>
 
@@ -141,27 +69,10 @@ if (mysql_num_rows($db_result) > 0) {
    <?php echo "<h3>TOTAL SALARY OF EMPLOYEE ID $EmpId is <u>".$rowsal["sumsal"]." Euros</u></h3>"; ?>
 <br>
  
-
-
-
-
-		
-
-
-
-
-
-<?php
-
- b:
-
-mysql_close($connection);
-echo "<a href='selectsalary.php'>Back to search salary</a>";
- echo "<br><br>";
- echo "<a href='homepage.php'>Back to home page</a>";
-?>  
+   
 <br>
-
+<a href='selectsalary.php'>Back to search salary</a><br><br>
+<a href='homepage.php'>Back to home page</a>
 </center>
     
 </div>
