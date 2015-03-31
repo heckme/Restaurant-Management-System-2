@@ -1,16 +1,17 @@
 <?php
 
-error_reporting(0);
+//error_reporting(0);
 
-session_start();
-if (isset($_SESSION[$username]))
-{
-  unset($_SESSION[$username]);
-  header('location:index.php');
-}
-session_destroy();
+ session_destroy();
+  require('session.class.php');
+  
+$session = new session();
+ 
+$session->start_session('_s', false);
+ 
+$_SESSION['something'] = 'Session functionality';
+//echo $_SESSION['something'];
 
-echo "PHP FOR INDEX";
  
 error_reporting(E_WARNING);
 ?>
